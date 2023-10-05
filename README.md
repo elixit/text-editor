@@ -1,2 +1,2 @@
 # text-editor
-# bundle taken from https://github.com/facebook/regenerator/blob/main/LICENSE*/
+# bundle used from https://github.com/facebook/regenerator/
