@@ -6,7 +6,6 @@
     "start": "webpack --watch",
     "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
   },
-  "author": "2U",
   "license": "UNLICENSED",
   "devDependencies": {
     "@babel/core": "^7.15.0",
