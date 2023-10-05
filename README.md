@@ -42,8 +42,7 @@ THEN I should have proper build scripts for a webpack application
 
 ## Functionalitylink
 
-[
-](https://drive.google.com/file/d/1r2bMly3Jq1rb4dGNCz79tBV96synPeAF/view?usp=sharing)
+(https://drive.google.com/file/d/1r2bMly3Jq1rb4dGNCz79tBV96synPeAF/view?usp=sharing)
 
 ## Usage
  - imported node modules:
