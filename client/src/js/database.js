@@ -1,7 +1,8 @@
 import { openDB } from 'idb';
 
-const initdb = async () =>
-  openDB('jate', 1, {
+// Initialize the database
+const initdb = async () => {
+  const db = await openDB('jate', 1, {
     upgrade(db) {
       if (db.objectStoreNames.contains('jate')) {
         return;
@@ -10,33 +11,29 @@ const initdb = async () =>
       console.log('jate database created');
     },
   });
+  return db;
+};
 
-// TODO: Add logic to a method that accepts some content and adds it to the database
-export const putDb = async (content) => console.error('putDb not implemented');
+// Add content to the database
+export const putDb = async (content) => {
+  const db = await initdb();
+  const tx = db.transaction('jate', 'readwrite');
+  const store = tx.objectStore('jate');
+  const request = store.add({ value: content }); // Use 'add' instead of 'put' for auto-incremented key
+  await tx.done;
+  console.log('Content added to the database:', request);
+};
 
-    const db = await openDB('jate', 1);
-    const request = store.put({ id: 1, value: content });
-    const result = store.put({ id: 1, value: content });
-    const tx = db.transaction('jate', 'readwrite');
-    const store = tx.objectStore('jate');
-    console.log(request, result);
-  
-  
+// Get content from the database by ID
+export const getDb = async (id) => {
+  const db = await initdb();
+  const tx = db.transaction('jate', 'readonly');
+  const store = tx.objectStore('jate');
+  const content = await store.get(id);
+  await tx.done;
+  console.log('Content retrieved from the database:', content?.value);
+  return content?.value;
+};
 
-  //TODO: Add logic for a method that gets all the content from the database
-  export const getDb = async () => console.log('Get from database');
-  {
-  
-
-    const id = await store.put({ value: content, id:1 })
-    const db = await openDB('jate', 1);
-    const tx = db.transaction('jate', 'readonly');  
-    const store = tx.objectStore('jate');
-    const content = await store.get(1);
-    await tx.done;
-  
-    return content?.value;
-  };
-  
-  
-  initdb();
+// Initialize the database when the module is imported
+initdb();
